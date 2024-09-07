@@ -16,12 +16,22 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  # Example job for node_exporter
-  - job_name: 'utils_node_exporter'
+  # Utils server node exporter
+  - job_name: 'node_exporter'
     static_configs:
       - targets: ['node_exporter:9100']
+        labels:
+          instance: 'utils-server'
+      - targets: ['192.168.68.55:9100']
+        labels:
+          instance: 'media-server'
 
-  # Example job for cadvisor
-  - job_name: 'utils_cadvisor'
+  # Utils server cadvisor
+  - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080']
+        labels:
+          instance: 'utils-server'
+      - targets: ['192.168.68.55:9101'] 
+        labels:
+          instance: 'media-server'
